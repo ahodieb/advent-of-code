@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code-2021/utils"
+	"github.com/ahodieb/advent-of-code/utils"
 )
 
 type Point struct {
@@ -142,7 +142,7 @@ func (s *Screen) String() string {
 }
 
 func main() {
-	f, err := os.Open("input-small.txt")
+	f, err := os.Open("2021/day5/input-small.txt")
 	if err != nil {
 		panic(err)
 	}

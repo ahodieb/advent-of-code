@@ -63,7 +63,7 @@ func (c *WindowIncrementCounter) Count(n int) {
 }
 
 func main() {
-	f, err := os.Open("input.txt")
+	f, err := os.Open("2021/day1/input.txt")
 	if err != nil {
 		panic(err)
 	}
