@@ -14,6 +14,14 @@ func ChunkedFromPath(path string, chunk int) (*Chunked, error) {
 
 	return &Chunked{input: in, chunkSize: chunk}, nil
 }
+func MustFromPath(path string) *Input {
+	in, err := FromPath(path)
+	if err != nil {
+		panic(err)
+	}
+
+	return in
+}
 
 func FromPath(path string) (*Input, error) {
 	f, err := os.Open(path)
