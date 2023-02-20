@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/ansi"
 	"github.com/ahodieb/advent-of-code/common/input"
 	"github.com/ahodieb/advent-of-code/common/slice"
+	"github.com/ahodieb/brute/ansi"
 )
 
 func main() {

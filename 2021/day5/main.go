@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/ansi"
 	"github.com/ahodieb/advent-of-code/common/slice"
+	"github.com/ahodieb/brute/ansi"
 )
 
 type Point struct {
