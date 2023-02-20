@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/ahodieb/advent-of-code-2022/common/ansi"
-	"github.com/ahodieb/advent-of-code-2022/common/input"
+	"github.com/ahodieb/advent-of-code/common/ansi"
+	"github.com/ahodieb/advent-of-code/common/input"
 )
 
 func main() {

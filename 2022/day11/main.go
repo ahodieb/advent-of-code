@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code-2022/common/input"
+	"github.com/ahodieb/advent-of-code/common/input"
 )
 
 func main() {

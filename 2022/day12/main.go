@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code-2022/common/ansi"
-	"github.com/ahodieb/advent-of-code-2022/common/input"
-	"github.com/ahodieb/advent-of-code-2022/common/slice"
+	"github.com/ahodieb/advent-of-code/common/ansi"
+	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/advent-of-code/common/slice"
 )
 
 func main() {
