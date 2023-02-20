@@ -5,7 +5,7 @@ import (
 	"sort"
 
 	"github.com/ahodieb/advent-of-code/common/input"
-	"github.com/ahodieb/advent-of-code/common/slice"
+	"github.com/ahodieb/brute/slices"
 )
 
 func main() {
@@ -30,5 +30,5 @@ func main() {
 	sums = append(sums, sum)
 
 	sort.Ints(sums)
-	fmt.Println(sums[len(sums)-3:], slice.Sum(sums[len(sums)-3:]...))
+	fmt.Println(sums[len(sums)-3:], slices.Sum(sums[len(sums)-3:]...))
 }

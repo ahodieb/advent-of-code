@@ -1,15 +1,10 @@
 package slice
 
-func Sum(numbers ...int) int {
-	s := 0
-	for _, n := range numbers {
-		s += n
-	}
-
-	return s
+type numbers interface {
+	uint8 | int | int64 | float32 | float64
 }
 
-func Min[T uint8 | int | int64 | float32 | float64](numbers ...T) T {
+func Min[T numbers](numbers ...T) T {
 	var min T
 	if len(numbers) == 0 {
 		return min
