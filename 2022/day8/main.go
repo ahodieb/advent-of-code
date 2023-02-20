@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	in, err := input.FromPath("day8/input.txt")
+	in, err := input.FromPath("2022/day8/input.txt")
 	if err != nil {
 		panic(err)
 	}

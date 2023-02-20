@@ -29,7 +29,7 @@ func part2() {
 }
 
 func part1() {
-	in, err := input.FromPath("day3/input.txt")
+	in, err := input.FromPath("2022/day3/input.txt")
 	if err != nil {
 		panic(err)
 	}

@@ -1,2 +1,8 @@
-# advent-of-code-2022
-Solutions to [advent of code 2022](https://adventofcode.com/2022)
+
+<p align="center">
+  <img src="img.png">
+</p>
+
+
+# Advent of code
+My solutions to some problems from [Advent of code](https://adventofcode.com)
