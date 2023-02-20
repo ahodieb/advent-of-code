@@ -98,7 +98,7 @@ func FindAllStartPositions(grid []string) []Pos {
 }
 
 // BellmanFord not sure if this is actually BellmanFord's algorithm
-// I think it is more Dijkstra's, i mixed things up trying to debug many silly bugs
+// I think it is more Dijkstra's, I mixed things up trying to debug many silly bugs
 func BellmanFord(graph []string, start Pos) map[Pos]int {
 	distances := make(map[Pos]int)
 	distances[start] = 0
