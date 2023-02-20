@@ -7,7 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/utils"
+	"github.com/ahodieb/advent-of-code/common/ansi"
+	"github.com/ahodieb/advent-of-code/common/slice"
 )
 
 type Point struct {
@@ -32,8 +33,8 @@ func (l *Line) IsDiagonal() bool {
 }
 
 func (l *Line) DiagLen() int {
-	s := utils.Min(l.start.x, l.end.x)
-	e := utils.Max(l.start.x, l.end.x)
+	s := slice.Min(l.start.x, l.end.x)
+	e := slice.Max(l.start.x, l.end.x)
 	return e - s
 }
 
@@ -61,10 +62,10 @@ func (s *Screen) Draw(line Line) {
 }
 
 func (s *Screen) DrawHV(line Line) {
-	sx := utils.Min(line.start.x, line.end.x)
-	ex := utils.Max(line.start.x, line.end.x)
-	sy := utils.Min(line.start.y, line.end.y)
-	ey := utils.Max(line.start.y, line.end.y)
+	sx := slice.Min(line.start.x, line.end.x)
+	ex := slice.Max(line.start.x, line.end.x)
+	sy := slice.Min(line.start.y, line.end.y)
+	ey := slice.Max(line.start.y, line.end.y)
 
 	for i := sx; i <= ex; i++ {
 		for j := sy; j <= ey; j++ {
@@ -116,22 +117,22 @@ func (s *Screen) String() string {
 	size := len(s.pixels)
 	for i := 0; i < size; i++ {
 		if i == 0 {
-			fmt.Fprint(&sb, utils.AnsiBGRed("   "))
+			fmt.Fprint(&sb, ansi.RedBG("   "))
 			for j := 0; j < size; j++ {
-				fmt.Fprint(&sb, utils.AnsiBGRed(fmt.Sprintf("%2d ", j)))
+				fmt.Fprint(&sb, ansi.RedBG(fmt.Sprintf("%2d ", j)))
 			}
 			fmt.Fprintln(&sb)
 		}
 		for j := 0; j < size; j++ {
 			if j == 0 {
-				fmt.Fprint(&sb, utils.AnsiBGRed(fmt.Sprintf("%2d ", i)))
+				fmt.Fprint(&sb, ansi.RedBG(fmt.Sprintf("%2d ", i)))
 			}
 			pixel := s.pixels[i][j]
 			fmtPixel := fmt.Sprintf("%2d ", pixel)
 			if pixel > 1 {
-				fmt.Fprint(&sb, utils.AnsiRed(fmtPixel))
+				fmt.Fprint(&sb, ansi.Red(fmtPixel))
 			} else if pixel > 0 {
-				fmt.Fprint(&sb, utils.AnsiGreen(fmtPixel))
+				fmt.Fprint(&sb, ansi.Green(fmtPixel))
 			} else {
 				fmt.Fprint(&sb, fmtPixel)
 			}
