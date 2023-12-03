@@ -48,6 +48,10 @@ type Cubes struct {
 	Blue  int
 }
 
+func (c Cubes) Power() int {
+	return c.Red * c.Green * c.Blue
+}
+
 type Game struct {
 	ID      int
 	Samples []Cubes
@@ -60,6 +64,24 @@ func (g *Game) Possible(c Cubes) bool {
 		}
 	}
 	return true
+}
+
+func (g *Game) Min() Cubes {
+	c := g.Samples[0]
+	for _, s := range g.Samples[1:] {
+		if s.Red > c.Red {
+			c.Red = s.Red
+		}
+
+		if s.Green > c.Green {
+			c.Green = s.Green
+		}
+
+		if s.Blue > c.Blue {
+			c.Blue = s.Blue
+		}
+	}
+	return c
 }
 
 func ParseGame(s string) Game {
@@ -104,13 +126,16 @@ func main() {
 
 	config := Cubes{Red: 12, Green: 13, Blue: 14}
 	sum := 0
+	sumPowers := 0
 	for in.Scan() {
 		game := ParseGame(in.Text())
 
 		if game.Possible(config) {
 			sum += game.ID
 		}
+
+		sumPowers += game.Min().Power()
 	}
 
-	fmt.Println(sum)
+	fmt.Println(sum, sumPowers)
 }
