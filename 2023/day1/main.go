@@ -3,18 +3,41 @@ package main
 import (
 	"fmt"
 	"github.com/ahodieb/advent-of-code/common/input"
-	"github.com/ahodieb/advent-of-code/common/slice"
-	"strconv"
 )
 
-func filterDigits(s string) string {
-	return string(slice.Filter([]rune(s), func(r rune) bool {
-		digits := map[rune]struct{}{
-			'0': {}, '1': {}, '2': {}, '3': {}, '4': {}, '5': {}, '6': {}, '7': {}, '8': {}, '9': {},
+func extractDigits(v string) []int {
+	m := map[string]int{
+		"1": 1,
+		"2": 2,
+		"3": 3,
+		"4": 4,
+		"5": 5,
+		"6": 6,
+		"7": 7,
+		"8": 8,
+		"9": 9,
+
+		"one":   1,
+		"two":   2,
+		"three": 3,
+		"four":  4,
+		"five":  5,
+		"six":   6,
+		"seven": 7,
+		"eight": 8,
+		"nine":  9,
+	}
+
+	var digits []int
+	for s := 0; s < len(v); s += 1 {
+		for e := s + 1; e < len(v)+1; e++ {
+			if d, isDigit := m[v[s:e]]; isDigit {
+				digits = append(digits, d)
+				break
+			}
 		}
-		_, isDigit := digits[r]
-		return isDigit
-	}))
+	}
+	return digits
 }
 
 func main() {
@@ -26,8 +49,8 @@ func main() {
 
 	sum := 0
 	for in.Scan() {
-		digits := filterDigits(in.Text())
-		n, _ := strconv.Atoi(string(digits[0]) + string(digits[len(digits)-1]))
+		digits := extractDigits(in.Text())
+		n := digits[0]*10 + digits[len(digits)-1]
 		sum += n
 	}
 
