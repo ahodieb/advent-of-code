@@ -27,6 +27,14 @@ func FromPath(path string) (*Input, error) {
 	}, nil
 }
 
+func FromArgsOrPath(path string) (*Input, error) {
+	if len(os.Args) > 1 {
+		return FromPath(os.Args[1])
+	}
+
+	return FromPath(path)
+}
+
 type Input struct {
 	scanner *bufio.Scanner
 	closer  func()
