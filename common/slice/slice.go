@@ -56,3 +56,12 @@ func Filter[T any](items []T, filters ...func(i T) bool) []T {
 
 	return newSlice
 }
+
+func ToSet[T comparable](items ...T) map[T]struct{} {
+	set := make(map[T]struct{})
+	for i := range items {
+		set[items[i]] = struct{}{}
+	}
+
+	return set
+}
