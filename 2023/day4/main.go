@@ -3,41 +3,74 @@ package main
 import (
 	"fmt"
 	"github.com/ahodieb/advent-of-code/common/input"
-	"github.com/ahodieb/advent-of-code/common/ints"
-	"github.com/ahodieb/advent-of-code/common/slice"
 	"math"
-	"strings"
 )
 
 type Card struct {
-	Name    string
-	Wining  map[int]struct{}
-	Numbers []int
+	Index   int
+	Matches int
 }
 
 func (c *Card) Points() int {
-	count := 0
-	for _, n := range c.Numbers {
-		if _, found := c.Wining[n]; found {
-			count++
-		}
-	}
-
-	if count == 0 {
+	matches := c.Matches
+	if matches == 0 {
 		return 0
 	}
 
-	return int(math.Pow(2, float64(count-1)))
+	return int(math.Pow(2, float64(matches-1)))
 }
 
 func ParseCard(s string) Card {
-	card := strings.Split(s, ":")
-	values := strings.Split(card[1], " | ")
+	inNumber := false
+	number := 0
+	index := 0
+	inIndex := true
+	inWinning := false
+	wining := make(map[int]struct{})
+	matches := 0
+
+	for _, r := range s[4:] {
+		if '0' <= r && r <= '9' {
+			if !inNumber {
+				number = int(r - '0')
+				inNumber = true
+			} else {
+				number = number*10 + int(r-'0')
+			}
+		} else {
+			if inNumber {
+				if inIndex {
+					index = number
+				} else if inWinning {
+					wining[number] = struct{}{}
+				} else {
+					if _, found := wining[number]; found {
+						matches += 1
+					}
+				}
+			}
+
+			inNumber = false
+			number = 0
+		}
+
+		if r == ':' {
+			inIndex = false
+			inWinning = true
+		}
+
+		if r == '|' {
+			inWinning = false
+		}
+	}
+
+	if _, found := wining[number]; inNumber && found {
+		matches += 1
+	}
 
 	return Card{
-		Name:    card[0],
-		Wining:  slice.ToSet(ints.FromSpaceSeperated(values[0])...),
-		Numbers: ints.FromSpaceSeperated(values[1]),
+		Index:   index - 1,
+		Matches: matches,
 	}
 }
 
@@ -48,12 +81,24 @@ func main() {
 	}
 	defer in.Close()
 
-	sum := 0
+	var cards []Card
+	var queue []Card
+	var processed int
+	var points = 0
+
 	for in.Scan() {
 		card := ParseCard(in.Text())
-		sum += card.Points()
-		//fmt.Println(card.Name, ":", card.Points(), " | ", card.Numbers)
+		cards = append(cards, card)
+		points += card.Points()
 	}
 
-	fmt.Println(sum)
+	queue = append(queue, cards...)
+	for ; len(queue) > 0; queue = queue[1:] {
+		card := queue[0]
+		processed += 1
+		queue = append(queue, cards[card.Index+1:][:card.Matches]...)
+	}
+
+	fmt.Println("Points:", points)
+	fmt.Println("Processed:", processed)
 }
