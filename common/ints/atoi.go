@@ -1,26 +1,30 @@
 package ints
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
-
 func FromSpaceSeperated(s string) []int {
-	var numbers []int
-	for _, ss := range strings.Split(s, " ") {
-		trimmed := strings.TrimSpace(ss)
-		if trimmed == "" {
-			continue
-		}
+	var values []int
+	n := 0
+	in := false
 
-		n, err := strconv.Atoi(ss)
-		if err != nil {
-			panic(fmt.Errorf("%q is not a number, %w", ss, err))
+	for _, r := range s {
+		if '0' <= r && r <= '9' {
+			if !in {
+				in = true
+				n = int(r - '0')
+			} else {
+				n = n*10 + (int(r - '0'))
+			}
+		} else {
+			if in {
+				values = append(values, n)
+				in = false
+				n = 0
+			}
 		}
-
-		numbers = append(numbers, n)
 	}
 
-	return numbers
+	if in {
+		values = append(values, n)
+	}
+
+	return values
 }
