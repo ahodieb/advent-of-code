@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/ahodieb/advent-of-code/common/input"
+	"strconv"
+	"strings"
 )
 
 func ways(time, distance int) int {
@@ -22,12 +24,11 @@ func main() {
 	}
 	defer in.Close()
 
-	times := in.ReadPrefixedNumbers("Time:")
-	distances := in.ReadPrefixedNumbers("Distance:")
-	margin := 1
-	for i := range times {
-		margin = margin * ways(times[i], distances[i])
-	}
+	t := strings.ReplaceAll(in.ReadPrefixedLine("Time:"), " ", "")
+	d := strings.ReplaceAll(in.ReadPrefixedLine("Distance:"), " ", "")
 
-	fmt.Println(margin)
+	time, _ := strconv.Atoi(t)
+	distance, _ := strconv.Atoi(d)
+
+	fmt.Println(ways(time, distance))
 }
