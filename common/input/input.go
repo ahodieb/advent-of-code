@@ -2,8 +2,10 @@ package input
 
 import (
 	"bufio"
+	"github.com/ahodieb/advent-of-code/common/ints"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func MustFromPath(path string) *Input {
@@ -51,6 +53,22 @@ func (i *Input) ScanAll() []string {
 	}
 
 	return lines
+}
+
+func (i *Input) ReadLine() string {
+	if i.Scan() {
+		return i.Text()
+	}
+
+	return ""
+}
+
+func (i *Input) ReadPrefixedLine(p string) string {
+	return strings.TrimPrefix(i.ReadLine(), p)
+}
+
+func (i *Input) ReadPrefixedNumbers(p string) []int {
+	return ints.FromSpaceSeperated(i.ReadPrefixedLine(p))
 }
 
 func (i *Input) Text() string {
