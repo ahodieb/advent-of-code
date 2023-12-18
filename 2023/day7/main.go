@@ -23,7 +23,6 @@ var CardStrength = map[rune]int{
 	'A': 14,
 	'K': 13,
 	'Q': 12,
-	'J': 11,
 	'T': 10,
 	'9': 9,
 	'8': 8,
@@ -33,6 +32,7 @@ var CardStrength = map[rune]int{
 	'4': 4,
 	'3': 3,
 	'2': 2,
+	'J': 1,
 }
 
 type RuneCountPair struct {
@@ -61,6 +61,22 @@ func (h Hand) Count() []RuneCountPair {
 	return pairs
 }
 
+func (h Hand) ReplaceJokers() Hand {
+	if strings.Count(string(h), "J") == 0 {
+		return h
+	}
+
+	x := h
+	for c := range CardStrength {
+		newHand := Hand(strings.ReplaceAll(string(h), "J", string(c)))
+		if newHand.Type() > x.Type() {
+			x = newHand
+		}
+	}
+
+	return x
+}
+
 func (h Hand) Type() int {
 	c := h.Count()
 
@@ -83,8 +99,11 @@ func (h Hand) Type() int {
 }
 
 func (h Hand) Cmp(hh Hand) int {
-	if h.Type() != hh.Type() {
-		return cmp.Compare(h.Type(), hh.Type())
+	h1 := h.ReplaceJokers().Type()
+	h2 := hh.ReplaceJokers().Type()
+
+	if h1 != h2 {
+		return cmp.Compare(h1, h2)
 	}
 
 	for i := range h {
@@ -126,9 +145,9 @@ func main() {
 	})
 
 	total := 0
-	for i := range hands {
-		// fmt.Println(h, "|", h.Bid, "x", i+1, "=", (i+1)*hands[i].Bid)
-		total += (i + 1) * hands[i].Bid
+	for i, h := range hands {
+		//fmt.Println(h, "|", h.Bid, "x", i+1, "=", (i+1)*hands[i].Bid)
+		total += (i + 1) * h.Bid
 	}
 
 	fmt.Println(total)
