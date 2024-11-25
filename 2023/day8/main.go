@@ -2,19 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 	"strings"
 )
 
 func main() {
-	in, err := input.FromArgsOrPath("2023/day8/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2023/day8/input.txt")
 	defer in.Close()
 
-	directions := in.ReadLine()
-	in.ReadLine()
+	directions := in.ReadText()
+	in.ReadText()
 
 	m := make(map[string][]string)
 	var current []string

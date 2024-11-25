@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 	"math"
 )
 
@@ -75,10 +75,7 @@ func ParseCard(s string) Card {
 }
 
 func main() {
-	in, err := input.FromArgsOrPath("2023/day4/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2023/day4/input.txt")
 	defer in.Close()
 
 	var cards []Card

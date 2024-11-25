@@ -3,7 +3,7 @@ package main
 import (
 	"cmp"
 	"fmt"
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 	"slices"
 	"strconv"
 	"strings"
@@ -133,13 +133,13 @@ func ParseLine(s string) HandAndBid {
 }
 
 func main() {
-	in, err := input.FromArgsOrPath("2023/day7/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2023/day7/input.txt")
 	defer in.Close()
 
-	hands := input.ParseLines(in, ParseLine)
+	var hands []HandAndBid
+	for in.Scan() {
+		hands = append(hands, ParseLine(in.Text()))
+	}
 	slices.SortStableFunc(hands, func(a, b HandAndBid) int {
 		return a.Hand.Cmp(b.Hand)
 	})

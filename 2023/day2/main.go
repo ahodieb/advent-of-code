@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 	"strconv"
 	"strings"
 )
@@ -118,10 +118,7 @@ func ParseGame(s string) Game {
 }
 
 func main() {
-	in, err := input.FromPath("2023/day2/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2023/day2/input.txt")
 	defer in.Close()
 
 	config := Cubes{Red: 12, Green: 13, Blue: 14}

@@ -1,7 +1,9 @@
 package input
 
+import "github.com/ahodieb/brute/input"
+
 type Chunked struct {
-	input     *Input
+	input     *input.Input
 	chunkSize int
 	chunk     []string
 }
@@ -33,11 +35,7 @@ func (c *Chunked) Scan() bool {
 	return true
 }
 
-func ChunkedFromPath(path string, chunk int) (*Chunked, error) {
-	in, err := FromPath(path)
-	if err != nil {
-		return nil, err
-	}
-
-	return &Chunked{input: in, chunkSize: chunk}, nil
+func ChunkedFromPath(path string, chunk int) *Chunked {
+	in := input.FromPath(path)
+	return &Chunked{input: in, chunkSize: chunk}
 }

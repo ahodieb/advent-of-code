@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 	"strconv"
 	"strings"
 )
@@ -18,14 +18,11 @@ func ways(time, distance int) int {
 	return c
 }
 func main() {
-	in, err := input.FromArgsOrPath("2023/day6/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2023/day6/input.txt")
 	defer in.Close()
 
-	t := strings.ReplaceAll(in.ReadPrefixedLine("Time:"), " ", "")
-	d := strings.ReplaceAll(in.ReadPrefixedLine("Distance:"), " ", "")
+	t := strings.ReplaceAll(strings.TrimPrefix(in.ReadText(), "Time:"), " ", "")
+	d := strings.ReplaceAll(strings.TrimPrefix(in.ReadText(), "Distance:"), " ", "")
 
 	time, _ := strconv.Atoi(t)
 	distance, _ := strconv.Atoi(d)

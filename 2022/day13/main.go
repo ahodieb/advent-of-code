@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
-	in := input.MustFromPath("day13/input.txt")
+	in := input.FromPath("day13/input.txt")
 	defer in.Close()
 
 	var packets []string

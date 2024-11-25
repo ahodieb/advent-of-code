@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/ahodieb/advent-of-code/common/input"
+	ch "github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
@@ -12,10 +12,7 @@ func main() {
 }
 
 func part2() {
-	in, err := input.ChunkedFromPath("day3/input.txt", 3)
-	if err != nil {
-		panic(err)
-	}
+	in := ch.ChunkedFromPath("day3/input.txt", 3)
 	defer in.Close()
 
 	sum := 0
@@ -29,10 +26,7 @@ func part2() {
 }
 
 func part1() {
-	in, err := input.FromPath("2022/day3/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2022/day3/input.txt")
 	defer in.Close()
 
 	sum := 0

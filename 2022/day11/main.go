@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
-	in := input.MustFromPath("day11/input.txt")
+	in := input.FromPath("day11/input.txt")
 	defer in.Close()
 
 	var monkeys []Monkey

@@ -4,15 +4,12 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 	"github.com/ahodieb/brute/slices"
 )
 
 func main() {
-	in, err := input.FromPath("2022/day1/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2022/day1/input.txt")
 	defer in.Close()
 
 	sum := 0

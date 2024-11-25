@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/input"
 	"github.com/ahodieb/advent-of-code/common/slice"
 	"github.com/ahodieb/brute/ansi"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
-	in := input.MustFromPath("day12/input.txt")
+	in := input.FromPath("day12/input.txt")
 	defer in.Close()
 
 	var grid []string

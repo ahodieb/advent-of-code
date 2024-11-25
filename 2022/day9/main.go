@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
-	in := input.MustFromPath("day9/input.txt")
+	in := input.FromPath("day9/input.txt")
 	defer in.Close()
 
 	rope := Rope{Knots: make([]Knot, 10)}

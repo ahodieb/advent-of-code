@@ -3,14 +3,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/ahodieb/advent-of-code/common/input"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
-	in, err := input.FromPath("2022/day2/input.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2022/day2/input.txt")
 	defer in.Close()
 
 	var score Score

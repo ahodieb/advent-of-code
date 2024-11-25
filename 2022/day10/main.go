@@ -5,12 +5,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/input"
 	"github.com/ahodieb/brute/ansi"
+	"github.com/ahodieb/brute/input"
 )
 
 func main() {
-	in := input.MustFromPath("day10/input.txt")
+	in := input.FromPath("day10/input.txt")
 	defer in.Close()
 
 	cpu := CPU{X: 1}

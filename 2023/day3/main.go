@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/ahodieb/advent-of-code/common/grid"
-	"github.com/ahodieb/advent-of-code/common/input"
 	"github.com/ahodieb/advent-of-code/common/slice"
 	"github.com/ahodieb/brute/ansi"
+	"github.com/ahodieb/brute/input"
 	"strings"
 )
 
@@ -162,10 +162,7 @@ func (e *Engine) Render() string {
 }
 
 func main() {
-	in, err := input.FromArgsOrPath("2023/day3/input-small.txt")
-	if err != nil {
-		panic(err)
-	}
+	in := input.FromPath("2023/day3/input-small.txt")
 	defer in.Close()
 
 	e := Engine{}
