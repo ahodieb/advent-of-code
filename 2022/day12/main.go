@@ -71,17 +71,17 @@ func main() {
 
 	fmt.Println(len(startingPositions))
 
-	min := distances[end]
+	mn := distances[end]
 	for i, p := range startingPositions {
 		fmt.Printf("Trying %v [%d/%d]\n", p, i+1, len(startingPositions))
 		d := BellmanFord(grid, p)
 
-		if dist, found := d[end]; found && dist < min {
-			min = dist
+		if dist, found := d[end]; found && dist < mn {
+			mn = dist
 		}
 	}
 
-	fmt.Println(min)
+	fmt.Println(mn)
 }
 
 func FindAllStartPositions(grid []string) []Pos {

@@ -45,15 +45,15 @@ func main() {
 }
 
 func MaxScenicScore(grid [][]uint8) int {
-	max := 0
+	mx := 0
 	for r := range grid {
 		for c := range grid[r] {
-			if s := score(grid, r, c); s > max {
-				max = s
+			if s := score(grid, r, c); s > mx {
+				mx = s
 			}
 		}
 	}
-	return max
+	return mx
 }
 
 func CountVisible(grid [][]uint8) int {
