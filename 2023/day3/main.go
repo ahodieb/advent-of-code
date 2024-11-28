@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/ahodieb/advent-of-code/common/grid"
 	"github.com/ahodieb/advent-of-code/common/slice"
 	"github.com/ahodieb/brute/ansi"
+	"github.com/ahodieb/brute/grid"
 	"github.com/ahodieb/brute/input"
 	"strings"
 )
@@ -32,8 +32,7 @@ func IsSymbol(cell grid.Cell[string]) bool {
 }
 
 type Part struct {
-	Start  grid.Position
-	End    grid.Position
+	grid.Region
 	Number int
 }
 
@@ -61,15 +60,15 @@ func (e *Engine) SumValidParts() int {
 
 func (e *Engine) GearsRatios() int {
 	sum := 0
-	for i := e.G.Iterator(); i.Next(); {
-		if i.Value() != "*" {
+	for i := range e.G.Cells() {
+		if i.Value != "*" {
 			continue
 		}
 
 		var adjacent []Part
 		for _, part := range e.ValidParts() {
 			for _, b := range part.Boundary() {
-				if i.Position() == b {
+				if i.Point == b {
 					adjacent = append(adjacent, part)
 					break
 				}
@@ -98,13 +97,14 @@ func (p *Part) IsValid(g *grid.Grid[string]) bool {
 	return false
 }
 
-func (p *Part) Boundary() []grid.Position {
-	var boundary []grid.Position
+func (p *Part) Boundary() []grid.Point {
+	var boundary []grid.Point
+
 	for i := p.Start.Column - 1; i <= p.End.Column+1; i++ {
 		boundary = append(boundary,
-			grid.Position{Row: p.Start.Row + 1, Column: i},
-			grid.Position{Row: p.Start.Row, Column: i},
-			grid.Position{Row: p.Start.Row - 1, Column: i},
+			grid.Point{Row: p.Start.Row + 1, Column: i},
+			grid.Point{Row: p.Start.Row, Column: i},
+			grid.Point{Row: p.Start.Row - 1, Column: i},
 		)
 	}
 
@@ -113,7 +113,7 @@ func (p *Part) Boundary() []grid.Position {
 
 func Parse(s string, row int) []Part {
 	var parts []Part
-	pos := grid.Position{Row: row, Column: 0}
+	pos := grid.Point{Row: row, Column: 0}
 
 	currentPart := Part{}
 	inPart := false
@@ -147,17 +147,17 @@ func Parse(s string, row int) []Part {
 }
 
 func (e *Engine) Render() string {
-	r := grid.NewAsciiRenderer()
+	r := grid.NewAnsiRenderer()
 
 	// r.FmtPositionsAnsi(ansi.PurpleBG, e.Parts[0].Boundary()...)
 
 	for _, p := range e.ValidParts() {
-		r.FmtPositionsAnsi(ansi.GreenBG, p.Start)
-		r.FmtPositionsAnsi(ansi.YellowBG, p.End)
+		r.FmtPoints(ansi.GreenBG, p.Start)
+		r.FmtPoints(ansi.YellowBG, p.End)
 
 	}
 
-	r.FmtCell(IsSymbol, grid.AnsiFormatter(ansi.BlueBG))
+	r.FmtFn(ansi.BlueBG, IsSymbol)
 	return r.Render(&e.G)
 }
 

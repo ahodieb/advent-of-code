@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/ahodieb/advent-of-code/common/ints"
-	"github.com/ahodieb/advent-of-code/common/slice"
 	"github.com/ahodieb/brute/input"
+	"slices"
 	"strings"
 )
 
@@ -128,7 +128,7 @@ func main() {
 	}
 
 	//fmt.Println("Locations", seeds)
-	fmt.Println("Closest:", slice.Min(mapped...))
+	fmt.Println("Closest:", slices.Min(mapped))
 }
 
 func expandSeeds(seeds []int) []int {

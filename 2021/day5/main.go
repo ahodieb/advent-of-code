@@ -7,7 +7,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ahodieb/advent-of-code/common/slice"
 	"github.com/ahodieb/brute/ansi"
 )
 
@@ -33,8 +32,8 @@ func (l *Line) IsDiagonal() bool {
 }
 
 func (l *Line) DiagLen() int {
-	s := slice.Min(l.start.x, l.end.x)
-	e := slice.Max(l.start.x, l.end.x)
+	s := min(l.start.x, l.end.x)
+	e := max(l.start.x, l.end.x)
 	return e - s
 }
 
@@ -62,10 +61,10 @@ func (s *Screen) Draw(line Line) {
 }
 
 func (s *Screen) DrawHV(line Line) {
-	sx := slice.Min(line.start.x, line.end.x)
-	ex := slice.Max(line.start.x, line.end.x)
-	sy := slice.Min(line.start.y, line.end.y)
-	ey := slice.Max(line.start.y, line.end.y)
+	sx := min(line.start.x, line.end.x)
+	ex := max(line.start.x, line.end.x)
+	sy := min(line.start.y, line.end.y)
+	ey := max(line.start.y, line.end.y)
 
 	for i := sx; i <= ex; i++ {
 		for j := sy; j <= ey; j++ {
