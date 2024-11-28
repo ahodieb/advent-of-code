@@ -1,6 +1,6 @@
 module github.com/ahodieb/advent-of-code
 
-go 1.21
+go 1.23
 
 require github.com/ahodieb/brute v0.0.0-20230219174513-a6e75332369a
 
