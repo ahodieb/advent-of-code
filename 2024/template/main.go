@@ -7,24 +7,13 @@ import (
 
 func main() {
 	day := "template"
-	p1(fmt.Sprintf("2024/%s/part1-small.txt", day))
-	p1(fmt.Sprintf("2024/%s/part1.txt", day))
-	p2(fmt.Sprintf("2024/%s/part2-small.txt", day))
-	p2(fmt.Sprintf("2024/%s/part2.txt", day))
+	solve(fmt.Sprintf("2024/%s/input-small.txt", day))
+	solve(fmt.Sprintf("2024/%s/input.txt", day))
 }
 
-func p1(p string) {
+func solve(p string) {
 	in := input.FromPath(p)
 	defer in.Close()
-
-	sum := 0
 	for in.Scan() {
-		sum += in.Int()
 	}
-
-	fmt.Println(sum)
-}
-
-func p2(p string) {
-	p1(p)
 }
